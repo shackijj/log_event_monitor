@@ -1,0 +1,16 @@
+<config>
+	<pattern>kernel</pattern>
+	<logfile>/var/log/messages</logfile>
+	<timeout>10</timeout>
+	<mailconfig>
+	        <server>localhost</server>
+		<subject>New log event</subject>
+	        <sendfrom>zabbix@zabbix155.mos.ru</sendfrom>
+		<sendto>
+			<address>k.shatsky@netris.ru</address>
+		</sendto>
+		<copyto>
+			<address>k.shatsky@netris.ru</address>
+		</copyto>
+	</mailconfig>
+</config>
