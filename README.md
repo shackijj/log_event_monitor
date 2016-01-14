@@ -9,7 +9,7 @@
 
 $ cd ~
 
-$ git clone git@gl.netris.ru:support/log_event_monitor.git
+$ git clone https://github.com/shackijj/log_event_monitor.git
 
 2. Конфигурируем
 
