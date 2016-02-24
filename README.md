@@ -60,10 +60,10 @@ $ vim log_event_monitor/conf/config.xml
                         <subject>New log event</subject>
                         <sendfrom>zabbix@zabbix155.mos.ru</sendfrom>
                         <sendto>
-                                <address>k.shatsky@netris.ru</address>
+                                <address>k.shatsky@gmail.com</address>
                         </sendto>
                         <copyto>
-                                <address>k.shatsky@netris.ru</address>
+                                <address>k.shatsky@gmail.com</address>
                         </copyto>
                 </mailconfig>
                 <OnEvent>
