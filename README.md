@@ -4,13 +4,8 @@
 Требования: python2.6
 
 Как развернуть?
-yum install log-event-monitor.noarch
 
 1. Копируем скрипт на машину
-
-$ cd ~
-
-$ git clone git@gl.netris.ru:support/log_event_monitor.git
 
 2. Конфигурируем
 
