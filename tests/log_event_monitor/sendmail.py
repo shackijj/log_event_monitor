@@ -59,17 +59,16 @@ class SendMail(object):
         msg.attach(MIMEText(text))
     
         for f in files or []:
-            if os.path.isfile(f):
-                with open(f, "rb") as fil:
-        
-                    part = MIMEBase('application', "octet-stream")
-                    part.set_payload(fil.read())
-                    Encoders.encode_base64(part)
-                    part.add_header('Content-Disposition',
-                        'attachment; filename="%s"' % os.path.basename(f)
-                    )
-                    msg.attach(part)
-                    fil.close()
+            with open(f, "rb") as fil:
+    
+                part = MIMEBase('application', "octet-stream")
+                part.set_payload(fil.read())
+                Encoders.encode_base64(part)
+                part.add_header('Content-Disposition',
+                    'attachment; filename="%s"' % os.path.basename(f)
+                )
+                msg.attach(part)
+                fil.close()
     
         smtp = smtplib.SMTP(server)
         smtp.sendmail(send_from, send_to, msg.as_string())

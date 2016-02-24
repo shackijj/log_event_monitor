@@ -1,0 +1,78 @@
+<LogEventMonitorApp>
+	<LogEventMonitor>
+	        <!-- Шаблон для поиска события в логах.
+	             работает на основе re.search()
+	             или как с флагом g в PCRE -->
+	        <pattern>kernel</pattern>
+	        <!-- Абсолютный путь к файлу лога -->
+	        <logfile>/home/kirill/test.log</logfile>
+	        <!-- Таймаут в течении которого ожидаем поступления новых событий
+	             и ждем завершения процессов OnEvent.
+	             По истечению таймаута все процессы OnEvent убиваются,
+	             накопленный буфер событий и файлы процессов отправляются на почту
+	             Параметр опциональный. По умолчанию 1мс
+	             -->
+	        <timeout>10</timeout>
+	        <!-- Интервал обновления в миллисекундах т.е.
+	             как часто мы проверяем наличие новых строк в файле
+	             Параметр опциональный. По умолчанию 1мс-->
+	        <UpdateInterval>100</UpdateInterval>
+	        <!-- Почтовый конфиг -->
+	        <mailconfig>
+	                <server>localhost</server>
+	                <subject>New log event</subject>
+	                <sendfrom>zabbix@zabbix155.mos.ru</sendfrom>
+	                <sendto>
+	                        <address>k.shatsky@netris.ru</address>
+	                </sendto>
+	                <copyto>
+	                        <address>k.shatsky@netris.ru</address>
+	                </copyto>
+	        </mailconfig>
+	        <!-- Команды которые будут запущены паралельно при получении
+	             нового события. Опциональный параметр-->
+	        <OnEvent>
+	                <!-- Команда bash. Эквивалент: command  2>1 1 > outfile.txt-->
+	                <command>iostat -ktx 1 120</command>
+	                <!-- Отправлять ли результирующий файл на почту?
+	                     Параметр необязательный по умолчанию false -->
+	                <SendOutput>true</SendOutput>
+	                <!-- Файл для перенаправления вывода команды.
+	                     Файл будет отправлен на почту во вложении
+	                     если установлен параметр SendOutput-->
+	                <OutputFile>/tmp/iostat.txt</OutputFile>
+	        </OnEvent>
+	        <OnEvent>
+	                <command>vmstat 1 120</command>
+	                <SendOutput>false</SendOutput>
+	                <OutputFile>/tmp/vmstat.txt</OutputFile>
+	        </OnEvent>
+	</LogEventMonitor>
+        <LogEventMonitor>
+                <pattern>kernel</pattern>
+                <logfile>/var/log/messages</logfile>
+                <timeout>10</timeout>
+                <UpdateInterval>100</UpdateInterval>
+                <mailconfig>
+                        <server>localhost</server>
+                        <subject>New log event</subject>
+                        <sendfrom>zabbix@zabbix155.mos.ru</sendfrom>
+                        <sendto>
+                                <address>k.shatsky@netris.ru</address>
+                        </sendto>
+                        <copyto>
+                                <address>k.shatsky@netris.ru</address>
+                        </copyto>
+                </mailconfig>
+                <OnEvent>
+                        <command>vmstat 1 120</command>
+                        <SendOutput>true</SendOutput>
+                        <OutputFile>/home/kirill/iostat.txt</OutputFile>
+                </OnEvent>
+                <OnEvent>
+                        <command>vmstat 1 120</command>
+                        <SendOutput>false</SendOutput>
+                        <OutputFile>/home/kirill/vmstat.txt</OutputFile>
+                </OnEvent>
+        </LogEventMonitor>
+</LogEventMonitorApp>
